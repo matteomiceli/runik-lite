@@ -1,0 +1,66 @@
+@import (css)
+  url("https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&display=swap");
+@import (css)
+  url("https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Ubuntu&display=swap");
+
+:root {
+  --bg: #181818;
+  --txt-body: white;
+  --green-main: #08a781;
+  --green-light: #4aaa93;
+  --green-dark: #056a52;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--txt-body);
+  font-family: "Fraunces", serif;
+}
+
+.step {
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  justify-items: center;
+
+  h1 {
+    margin: 72px 0;
+    font-size: 2.5rem;
+  }
+
+  .reader-plug {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div {
+      height: fit-content;
+    }
+
+    .btn-main {
+      margin: 72px 0;
+      min-width: 256px;
+      min-height: 64px;
+      font-size: 1rem;
+      font-family: "ubuntu", sans-serif;
+      font-weight: bold;
+      background-color: var(--green-main);
+      border-radius: 10px;
+      border-width: 0 2px 6px 2px;
+      border-style: solid;
+      border-color: var(--green-dark);
+      color: white;
+      cursor: pointer;
+      transition: all 50ms ease-in-out;
+
+      &:hover {
+        background-color: var(--green-light);
+      }
+      &:active {
+        border-bottom-width: 4px;
+      }
+    }
+  }
+}

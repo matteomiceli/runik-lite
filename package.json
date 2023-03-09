@@ -1,0 +1,17 @@
+{
+  "name": "runik-lite",
+  "version": "0.0.1",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "build": "rm -rf ./dist && npx parcel build",
+    "watch": "rm -rf ./dist && npx parcel watch",
+    "dev": "rm -rf ./dist && npx parcel serve"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-less": "^2.8.3",
+    "parcel": "^2.8.3"
+  }
+}
