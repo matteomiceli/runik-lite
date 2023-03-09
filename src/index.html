@@ -8,22 +8,24 @@
     <title>Runik Lite</title>
   </head>
   <body>
-    <div class="step step-1">
-      <h1>Plug-in your reader device to get started!</h1>
-      <div class="reader-plug">
-        <div>
-          <img class="img-reader" src="assets/reader.png" alt="ereader" />
+    <main>
+      <div class="step" id="step-1">
+        <h1>Plug-in your reader device to get started!</h1>
+        <div class="reader-plug">
+          <div class="img-reader">
+            <img src="assets/reader.png" alt="ereader" />
+          </div>
+          <div class="img-plug">
+            <img src="assets/plug.png" alt="plug" />
+          </div>
         </div>
         <div>
-          <img class="img-plug" src="assets/plug.png" alt="plug" />
+          <button class="btn-main" type="button">
+            I'm plugged in, let's go 👍
+          </button>
         </div>
       </div>
-      <div>
-        <button class="btn-main" type="button">
-          I'm plugged in, let's go 👍
-        </button>
-      </div>
-    </div>
+    </main>
 
     <script type="module" src="app.ts"></script>
   </body>

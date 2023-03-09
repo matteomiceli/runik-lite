@@ -26,6 +26,7 @@ body {
   justify-items: center;
 
   h1 {
+    text-align: center;
     margin: 72px 0;
     font-size: 2.5rem;
   }
@@ -35,8 +36,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     div {
       height: fit-content;
+    }
+
+    .img-plug {
+      animation: 4s ease-in-out infinite plugin;
     }
   }
 
@@ -62,5 +68,19 @@ body {
     &:active {
       border-bottom-width: 4px;
     }
+  }
+}
+
+@keyframes plugin {
+  0% {
+    transform: translateY(48px);
+  }
+
+  20% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
