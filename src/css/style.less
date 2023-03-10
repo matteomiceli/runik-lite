@@ -18,6 +18,10 @@ body {
   font-family: "Fraunces", serif;
 }
 
+main {
+  margin: 1rem 1.5rem;
+}
+
 .step {
   display: grid;
   grid-template-rows: min-content 1fr min-content;
@@ -31,15 +35,11 @@ body {
     font-size: 2.5rem;
   }
 
-  .reader-plug {
+  .step-img-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    div {
-      height: fit-content;
-    }
 
     .img-plug {
       animation: 4s ease-in-out infinite plugin;
@@ -71,6 +71,15 @@ body {
   }
 }
 
+#pointer {
+  width: 64px;
+  position: relative;
+  top: -100px;
+  left: 0;
+  border: yellow 1px solid;
+  animation: 5s ease-in-out infinite pointer-demo;
+}
+
 @keyframes plugin {
   0% {
     transform: translateY(48px);
@@ -82,5 +91,44 @@ body {
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes pointer-demo {
+  0% {
+    left: 150px;
+    top: -180px;
+  }
+  20% {
+    left: -200px;
+    top: -100px;
+    scale: 1;
+  }
+  25% {
+    left: -200px;
+    top: -100px;
+    scale: 0.8;
+  }
+  30% {
+    left: -200px;
+    top: -100px;
+    scale: 1;
+  }
+  60% {
+    left: 200px;
+    top: -30px;
+    scale: 1;
+  }
+  65% {
+    scale: 0.8;
+  }
+  70% {
+    scale: 1;
+    left: 200px;
+    top: -30px;
+  }
+  100% {
+    left: 150px;
+    top: -180px;
   }
 }

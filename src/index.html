@@ -9,9 +9,10 @@
   </head>
   <body>
     <main>
+      <!-- Step 1 -->
       <div class="step" id="step-1">
         <h1>Plug-in your reader device to get started!</h1>
-        <div class="reader-plug">
+        <div class="step-img-container reader-plug">
           <div class="img-reader">
             <img src="assets/reader.png" alt="ereader" />
           </div>
@@ -20,11 +21,26 @@
           </div>
         </div>
         <div>
-          <button class="btn-main" type="button">
+          <button id="plugged-in" class="btn-main" type="button">
             I'm plugged in, let's go 👍
           </button>
         </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step-2">
+        <h1>Select your e-reader using the folder picker.</h1>
+
+          <div class="step-img-container img-file-picker">
+            <img src="assets/file-picker.png" alt="file picker demo" />
+          </div>
+          <img id="pointer" src="./assets/pointer.png" alt="pointer">
+        <div>
+          <button id="folder-picker" class="btn-main" type="button">
+            Open folder picker
+          </button>
+        </div>
       </div>
+
     </main>
 
     <script type="module" src="app.ts"></script>
