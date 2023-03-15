@@ -10,7 +10,7 @@
   <body>
     <main>
       <!-- Step 1 -->
-      <div class="step" id="step-1">
+      <div class="fullscreen step" id="step-1">
         <h1>Plug-in your reader device to get started!</h1>
         <div class="step-img-container reader-plug">
           <div class="img-reader">
@@ -28,7 +28,7 @@
       </div>
 
       <!-- Step 2 -->
-      <div class="step" id="step-2">
+      <div class="hide fullscreen step" id="step-2">
         <h1>Select your e-reader using the folder picker.</h1>
         <div class="step-img-container img-file-picker">
           <img src="assets/file-picker.png" alt="file picker demo" />
@@ -42,9 +42,18 @@
       </div>
 
       <!-- Step 3 -->
-      <div class="step" id="step-3">
+      <div class="hide fullscreen step" id="step-3">
         <img id="arrow" src="./assets/arrow.png" alt="arrow" />
-        <h1>Allow site to view files and save changes.</h1>
+        <h1>Allow site to <u>view files</u> and <u>save changes</u>.</h1>
+      </div>
+
+      <!-- Dashboard -->
+      <div class="hide fullscreen" id="dashboard">
+        <h1>Dashboard</h1>
+        <div>
+          <label for="load-epub">Load Epub</label>
+        </div>
+        <input type="file" name="Load Epub" id="load-epub" />
       </div>
     </main>
 

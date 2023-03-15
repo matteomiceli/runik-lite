@@ -19,14 +19,20 @@ body {
 }
 
 main {
-  margin: 1rem 1.5rem;
+  margin: 0 1.5rem;
+}
+
+.fullscreen {
+  height: 100vh;
+}
+.hide {
+  display: none !important;
 }
 
 .step {
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   grid-template-columns: 1fr;
-  height: 100vh;
   justify-items: center;
 
   h1 {
@@ -42,7 +48,7 @@ main {
     align-items: center;
 
     .img-plug {
-      animation: 4s ease-in-out infinite plugin;
+      animation: 3s ease-in-out infinite plugin;
     }
   }
 
@@ -81,6 +87,7 @@ main {
   top: -50px;
   animation: 4s ease-in-out normal pointer-demo;
 }
+
 #step-3 {
   display: flex;
   flex-direction: column;
@@ -100,10 +107,6 @@ main {
   }
 
   20% {
-    transform: translateY(0);
-  }
-
-  100% {
     transform: translateY(0);
   }
 }
