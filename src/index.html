@@ -21,7 +21,7 @@
           </div>
         </div>
         <div>
-          <button id="plugged-in" class="btn-main" type="button">
+          <button id="plugged-in" class="btn-lg btn-primary" type="button">
             I'm plugged in, let's go 👍
           </button>
         </div>
@@ -35,7 +35,7 @@
         </div>
         <img id="pointer" src="./assets/pointer.png" alt="pointer" />
         <div>
-          <button id="folder-picker" class="btn-main" type="button">
+          <button id="folder-picker" class="btn-lg btn-primary" type="button">
             Open folder picker
           </button>
         </div>
@@ -48,12 +48,29 @@
       </div>
 
       <!-- Dashboard -->
-      <div class="hide fullscreen" id="dashboard">
+      <div class="fullscreen" id="dashboard">
         <h1>Dashboard</h1>
-        <div>
-          <label for="load-epub">Load Epub</label>
+        <div id="dash-container">
+          <div class="dash-left-right">
+            <label class="btn-lg file-select-btn" for="load-epub">
+              <input
+                class="screen-reader-only"
+                type="file"
+                name="Load Epub"
+                id="load-epub"
+              />
+              <span id="file-select-icon-container">
+                <img
+                  id="select-book-icon"
+                  src="./assets/book-solid.svg"
+                  alt="book icon"
+                />
+              </span>
+              <span id="file-select-text-container">Select Book</span>
+            </label>
+          </div>
+          <div class="dash-left-right">asd</div>
         </div>
-        <input type="file" name="Load Epub" id="load-epub" multiple />
       </div>
     </main>
 
