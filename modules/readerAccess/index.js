@@ -7,6 +7,8 @@ $parcel$export($38b802e392cbf1d2$exports, "readerAccess", () => $38b802e392cbf1d
 var $2ed9bbf9db2656b0$exports = {};
 
 $parcel$export($2ed9bbf9db2656b0$exports, "getEpubMetaData", () => $2ed9bbf9db2656b0$export$76358cc67b9d0035);
+$parcel$export($2ed9bbf9db2656b0$exports, "getRelativeOpfDir", () => $2ed9bbf9db2656b0$export$36455ac9c447bc3);
+$parcel$export($2ed9bbf9db2656b0$exports, "resolveRelativePath", () => $2ed9bbf9db2656b0$export$d3e288fe2560b9f7);
 /// <reference types="./index.d.ts" />
 /*
  Copyright (c) 2022 Gildas Lormeau. All rights reserved.
@@ -12131,29 +12133,70 @@ try {
 });
 
 
+function $e046c40ad0fece26$export$abe9a5bcb413ba09(xml, tagName) {
+    return xml.getElementsByTagName(tagName)?.[0]?.innerHTML;
+}
+function $e046c40ad0fece26$export$f579524004cbb98e(xml, tagName, attributeName) {
+    return Object.values(xml.getElementsByTagName(tagName)?.[0].attributes).find((attr)=>attr.name === attributeName)?.value;
+}
+function $e046c40ad0fece26$export$6e1c64f99d40e578(xml) {
+    const coverTag = xml.getElementsByName("cover")?.[0];
+    if (!coverTag) return;
+    // Manifest ID
+    const coverId = Object.values(coverTag.attributes).find((attr)=>attr.name === "content")?.value;
+    // Get cover path from manifest
+    return Object.values(xml.getElementById(coverId || "")?.attributes || []).find((attr)=>attr.name === "href")?.value;
+}
+function $e046c40ad0fece26$export$5a91268dedb2c00(xml, tag, val) {
+    return Object.values(xml.getElementsByTagName(tag)).find((t)=>Object.values(t.attributes).find((a)=>a.value === val));
+}
+
+
 async function $2ed9bbf9db2656b0$export$76358cc67b9d0035(file) {
+    const unzipped = await $2ed9bbf9db2656b0$var$unpackEpub(file);
+    const opfFile = unzipped.find((file)=>file.filename.includes("opf"));
+    const opf = await opfFile?.getData(new $ea95378fdeb53702$export$4e2ccb0172e96d5b());
+    if (!opf || !opfFile) throw new Error("Invalid epub file");
+    const parser = new DOMParser();
+    const xmlData = parser.parseFromString(opf, "text/xml");
+    const opfRealtiveDir = $2ed9bbf9db2656b0$export$36455ac9c447bc3(opfFile.filename);
+    const coverPath = $e046c40ad0fece26$export$6e1c64f99d40e578(xmlData);
+    return {
+        title: $e046c40ad0fece26$export$abe9a5bcb413ba09(xmlData, "dc:title"),
+        author: $e046c40ad0fece26$export$abe9a5bcb413ba09(xmlData, "dc:creator"),
+        authorFileAs: $e046c40ad0fece26$export$f579524004cbb98e(xmlData, "dc:creator", "opf:file-as"),
+        description: $e046c40ad0fece26$export$abe9a5bcb413ba09(xmlData, "dc:description"),
+        isbn: $e046c40ad0fece26$export$5a91268dedb2c00(xmlData, "dc:identifier", "ISBN")?.innerHTML,
+        cover: {
+            path: coverPath,
+            url: await $2ed9bbf9db2656b0$var$getCoverImage(unzipped, coverPath, opfRealtiveDir)
+        },
+        opfRealtiveDir: opfRealtiveDir
+    };
+}
+async function $2ed9bbf9db2656b0$var$unpackEpub(file) {
     if (file.type !== "application/epub+zip") throw new Error("File is not a valid epub");
     const zipReader = new $721054fd5d0a99f7$export$25e4af3b2af7fc76(new $ea95378fdeb53702$export$aa5015be25fe7f79(file));
     const unzipped = await zipReader.getEntries();
     await zipReader.close();
-    const writer = new $ea95378fdeb53702$export$4e2ccb0172e96d5b();
-    const opf = await unzipped.find((file)=>{
-        return file.filename.includes("opf");
-    })?.getData(writer);
-    if (!opf) throw new Error("Epub does not contain opf metadata");
-    const parser = new DOMParser();
-    const xmlData = parser.parseFromString(opf, "text/xml");
-    return {
-        title: $2ed9bbf9db2656b0$var$getXMLValueByTag(xmlData, "dc:title"),
-        author: $2ed9bbf9db2656b0$var$getXMLValueByTag(xmlData, "dc:creator"),
-        authorFileAs: $2ed9bbf9db2656b0$var$getXMLAttributeValueByName(xmlData, "dc:creator", "opf:file-as")
-    };
+    return unzipped;
 }
-function $2ed9bbf9db2656b0$var$getXMLValueByTag(xml, tagName) {
-    return xml.getElementsByTagName(tagName)?.[0].innerHTML;
+async function $2ed9bbf9db2656b0$var$getCoverImage(unpacked, path, relativeDir) {
+    if (!path) return;
+    const relPath = $2ed9bbf9db2656b0$export$d3e288fe2560b9f7(relativeDir, path);
+    const coverFile = unpacked.find((entry)=>entry.filename === relPath);
+    if (!coverFile) return undefined;
+    return URL.createObjectURL(await coverFile?.getData(new $ea95378fdeb53702$export$b1948fceba813858()));
 }
-function $2ed9bbf9db2656b0$var$getXMLAttributeValueByName(xml, tagName, attributeName) {
-    return Object.values(xml.getElementsByTagName(tagName)?.[0].attributes).find((attr)=>attr.name === attributeName)?.value;
+function $2ed9bbf9db2656b0$export$36455ac9c447bc3(opfPath) {
+    const pathPieces = opfPath.split("/").filter((p)=>!p.includes(".opf"));
+    if (!pathPieces.length) return;
+    return pathPieces.join("/").concat("/");
+}
+function $2ed9bbf9db2656b0$export$d3e288fe2560b9f7(relativeDir, path) {
+    if (!path) return;
+    if (!relativeDir) return path;
+    return relativeDir + path;
 }
 
 
@@ -12239,8 +12282,7 @@ const $38b802e392cbf1d2$export$252ceff579eadda4 = async ()=>{
         const dirHandle = await window.showDirectoryPicker();
         return new (0, $13adae80a02e59c2$export$2f7a2f0e90c07dc4)(dirHandle);
     } catch (e) {
-        console.warn("ReaderAccess: User aborted device selection \n\n", e);
-        return null;
+        throw new Error("ReaderAccess: User aborted device selection \n\n" + e);
     }
 };
 
@@ -12248,5 +12290,5 @@ const $38b802e392cbf1d2$export$252ceff579eadda4 = async ()=>{
 
 
 
-export {$38b802e392cbf1d2$export$252ceff579eadda4 as readerAccess, $2ed9bbf9db2656b0$export$76358cc67b9d0035 as getEpubMetaData};
+export {$38b802e392cbf1d2$export$252ceff579eadda4 as readerAccess, $2ed9bbf9db2656b0$export$76358cc67b9d0035 as getEpubMetaData, $2ed9bbf9db2656b0$export$36455ac9c447bc3 as getRelativeOpfDir, $2ed9bbf9db2656b0$export$d3e288fe2560b9f7 as resolveRelativePath};
 //# sourceMappingURL=index.js.map

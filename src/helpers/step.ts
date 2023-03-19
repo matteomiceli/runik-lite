@@ -5,7 +5,7 @@ const pages = [
   document.getElementById("dashboard"),
 ];
 
-export let currentStep = 0;
+let currentStep = 0;
 
 export function step(step?: number) {
   if (currentStep === 3) {

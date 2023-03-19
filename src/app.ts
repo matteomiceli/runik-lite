@@ -23,6 +23,7 @@ pickerBtn?.addEventListener("click", async () => {
     step();
   } catch (e) {
     console.error(e);
+    step(1);
   }
 });
 
