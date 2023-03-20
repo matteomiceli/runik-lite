@@ -51,13 +51,14 @@
       <div class="fullscreen" id="dashboard">
         <h1>Dashboard</h1>
         <div id="dash-container">
-          <div class="dash-left-right">
-            <label class="btn-lg file-select-btn" for="load-epub">
+          <div class="dash-left">
+            <label class="btn-sm file-select-btn" for="load-epub">
               <input
                 class="screen-reader-only"
                 type="file"
                 name="Load Epub"
                 id="load-epub"
+                accept="application/epub+zip"
               />
               <span id="file-select-icon-container">
                 <img
@@ -69,17 +70,12 @@
               <span id="file-select-text-container">Select Book</span>
             </label>
           </div>
-          <div class="dash-left-right">
-            <img
-              style="max-width: 200px"
-              src="assets/reader.png"
-              alt="ereader"
-            />
+          <div class="dash-right">
+            <img src="assets/reader.png" alt="ereader" />
+            <h3 id="dash-device-name">-- no device found --</h3>
+            <i id="dash-device-type"></i>
           </div>
         </div>
-        <button id="folder-picker" class="btn-lg btn-primary" type="button">
-          Send Book to Device
-        </button>
       </div>
     </main>
 

@@ -5,6 +5,8 @@
 
 :root {
   --bg: #181818;
+  --dark-gray: #0f0f0f;
+  --black: #030303;
   --txt-body: white;
   --green-main: #08a781;
   --green-light: #4aaa93;
@@ -50,6 +52,16 @@ main {
   transition: all 50ms ease-in-out;
 }
 
+.btn-sm {
+  min-width: 196px;
+  height: 48px;
+  font-size: 1rem;
+  font-family: "ubuntu", sans-serif;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 50ms ease-in-out;
+}
+
 .btn-primary {
   margin: 72px 0;
   background-color: var(--green-main);
@@ -72,6 +84,7 @@ main {
   border: 2px solid white;
   display: flex;
   cursor: pointer;
+  overflow: hidden;
 
   span {
     display: flex;
@@ -85,7 +98,7 @@ main {
 
     #select-book-icon {
       margin: auto;
-      height: 28px;
+      height: 24px;
     }
   }
   #file-select-text-container {
@@ -94,7 +107,9 @@ main {
 
   &:hover,
   &:focus-within {
-    background-color: var(--quarter-white);
+    #file-select-text-container {
+      background-color: var(--quarter-white);
+    }
   }
 }
 
@@ -148,20 +163,42 @@ main {
 }
 
 // Dashboard
-#dash-container {
+#dashboard {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 2%;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content 1fr;
 
-  .dash-left-right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px #7c7c7c solid;
+  h1 {
+    margin: 72px 0 32px;
+    font-size: 2.5rem;
+  }
+
+  #dash-container {
+    display: grid;
+    grid-template-columns: 1fr 0.35fr;
     border-radius: 15px;
-    height: 55%;
-    min-height: 350px;
+    background-color: var(--dark-gray);
+    overflow: hidden;
+    margin-bottom: 72px;
+
+    .dash-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 500px;
+    }
+    .dash-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--black);
+      font-family: "ubuntu", sans-serif;
+
+      img {
+        width: 150px;
+      }
+    }
   }
 }
 
